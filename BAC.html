@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم الباكالوريا - منصة الطلبة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-color: #1f2937;
+            --light-text: #6b7280;
+            --light-bg: #f9fafb;
+            --white: #ffffff;
+            --card-bg: #fff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 0.75rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            direction: rtl;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* الهيدر */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            opacity: 0.1;
+        }
+        
+        .header h1 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.125rem;
+            max-width: 42rem;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0.9;
+        }
+        
+        /* بطاقات المحتوى */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-0.25rem);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 12rem;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .card:hover .card-image img {
+            transform: scale(1.03);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-category {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            margin: 0.75rem 0;
+            font-weight: 600;
+        }
+        
+        .card-description {
+            color: var(--light-text);
+            margin-bottom: 1.25rem;
+            font-size: 0.9375rem;
+        }
+        
+        /* الأزرار */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-0.125rem);
+        }
+        
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+        
+        /* صندوق التليجرام */
+        .telegram-card {
+            background: linear-gradient(135deg, #0088cc, #00aced);
+            color: white;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 15px -3px rgba(0, 136, 204, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .telegram-card::before {
+            content: "";
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            width: 6rem;
+            height: 6rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .telegram-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .telegram-icon {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .telegram-text h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.375rem;
+        }
+        
+        .telegram-text p {
+            opacity: 0.9;
+            font-size: 0.9375rem;
+        }
+        
+        .admins-badge {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.375rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8125rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            backdrop-filter: blur(5px);
+            margin-top: 0.5rem;
+        }
+        
+        .telegram-action {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        /* شبكة التطبيقات */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* الأقسام */
+        .section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            font-size: 1.375rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 3rem;
+            height: 0.1875rem;
+            background-color: var(--primary-color);
+            border-radius: 0.1875rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-card {
+            background-color: rgba(37, 99, 235, 0.05);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.0625rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-card p {
+            font-size: 0.875rem;
+            color: var(--light-text);
+        }
+        
+        /* الفوتر */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: -2.5rem;
+            left: 0;
+            right: 0;
+            height: 2.5rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%232563eb" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/><path fill="%232563eb" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/><path fill="%232563eb" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+        
+        .footer-section p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.875rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-0.125rem);
+        }
+        
+        .social-tooltip {
+            position: absolute;
+            bottom: -1.75rem;
+            background-color: var(--text-color);
+            color: var(--white);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+        
+        .social-link:hover .social-tooltip {
+            opacity: 1;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* قوائم */
+        .list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .list-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .list-item i {
+            color: var(--primary-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* تصميم متجاوب */
+        @media (min-width: 768px) {
+            .header {
+                padding: 4rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .telegram-card {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .telegram-content {
+                flex: 1;
+            }
+            
+            .telegram-action {
+                padding: 1.5rem;
+                flex: 0 0 auto;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .card-image {
+                height: 10rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 2.5rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section {
+                padding: 1.25rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>قسم الباكالوريا - منصة الطلبة</h1>
+            <p>دروس، ملخصات، نصائح وكل ما تحتاجه للنجاح في الباكالوريا</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- بطاقة التليجرام -->
+        <div class="telegram-card">
+            <div class="telegram-content">
+                <i class="fab fa-telegram telegram-icon"></i>
+                <div class="telegram-text">
+                    <h3>انضم إلى قناتنا على التليجرام</h3>
+                    <p>احصل على آخر التحديثات والدروس والملخصات مباشرة من فريقنا المتخصص</p>
+                    <div class="admins-badge">
+                        <i class="fas fa-user-graduate"></i>
+                        فريق من 20 مشرفاً جامعياً متخصص
+                    </div>
+                </div>
+            </div>
+            <div class="telegram-action">
+                <a href="https://t.me/S22MCS_FOR_BAC" class="btn btn-primary btn-block">
+                    <i class="fab fa-telegram"></i> انضم الآن
+                </a>
+            </div>
+        </div>
+
+        <!-- بطاقة المحتوى الرئيسية -->
+        <div class="card">
+            <div class="card-image">
+                <img src="BAC.jpg" alt="باكالوريا">
+            </div>
+            <div class="card-content">
+                <div class="card-category">
+                    <i class="fas fa-graduation-cap"></i>
+                    دعم شامل لطلبة الباكالوريا
+                </div>
+                <h2 class="card-title">قسم الباكالوريا على تيليجرام</h2>
+                <p class="card-description">
+                    منصة تعليمية متكاملة تحت إشراف فريق من الطلبة الجامعيين في مختلف التخصصات لتقديم أفضل الدعم لطلبة الباكالوريا في جميع المواد والشعب.
+                </p>
+                <div class="card-description">
+                    <i class="fas fa-users"></i> عدد الأعضاء: 2,000+
+                </div>
+            </div>
+        </div>
+
+        <!-- أهداف الفرع -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-bullseye"></i>
+                أهداف الفرع
+            </h2>
+            <p>
+                نهدف إلى توفير محتوى تعليمي موثوق ومجاني لطلبة الباكالوريا لمساعدتهم على التفوق في الامتحانات. نقدم الدعم الكامل في جميع المواد والشعب.
+            </p>
+            <p>
+                نسعى لخلق مجتمع تعليمي تفاعلي حيث يمكن للطلبة تبادل المعرفة والخبرات والحصول على إجابات لاستفساراتهم من خبراء ومشرفين متخصصين.
+            </p>
+        </div>
+
+        <!-- فريق المشرفين -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                فريق المشرفين
+            </h2>
+            <p>
+                يتم إدارة القسم من قبل فريق مكون من حوالي 20 مشرفاً من طلبة الجامعات في مختلف التخصصات العلمية والأدبية، مما يضمن تقديم الدعم الشامل لجميع مواد الباكالوريا.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-atom"></i>
+                    <h3>التخصصات العلمية</h3>
+                    <p>فيزياء، كيمياء، رياضيات، علوم الحياة</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-book"></i>
+                    <h3>التخصصات الأدبية</h3>
+                    <p>لغة عربية، فلسفة، تاريخ وجغرافيا</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-language"></i>
+                    <h3>اللغات الأجنبية</h3>
+                    <p>فرنسية، إنجليزية، إسبانية</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المواد والدروس -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-book-open"></i>
+                المواد والدروس
+            </h2>
+            <p>نوفر ملخصات وتمارين وحلول نموذجية لجميع مواد الباكالوريا بما في ذلك:</p>
+            
+            <ul class="list">
+                <li class="list-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>الرياضيات بجميع مستوياتها</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>الفيزياء والكيمياء</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>علوم الحياة والأرض</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>الفلسفة واللغة العربية</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>اللغات الأجنبية (فرنسية، إنجليزية)</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- نصائح واجتياز الامتحان -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-lightbulb"></i>
+                نصائح واجتياز الامتحان
+            </h2>
+            <p>نقدم إرشادات تقنية ونفسية للتعامل مع ضغط الامتحانات والتحضير الفعّال. تشمل نصائحنا:</p>
+            
+            <ul class="list">
+                <li class="list-item">
+                    <i class="fas fa-check"></i>
+                    <span>كيفية إدارة الوقت أثناء الامتحان</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check"></i>
+                    <span>طرق المذاكرة الفعالة</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check"></i>
+                    <span>التعامل مع القلق والتوتر</span>
+                </li>
+                <li class="list-item">
+                    <i class="fas fa-check"></i>
+                    <span>كيفية كتابة إجابات نموذجية</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- تطبيقات مفيدة -->
+        <h2 class="section-title" style="margin-top: 2rem;">
+            <i class="fas fa-mobile-alt"></i>
+            تطبيقات مفيدة لطلبة الباكالوريا
+        </h2>
+        
+        <div class="apps-grid">
+            <!-- تطبيق 1 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="app/photo_2024-05-16_10-46-53.jpg" alt="تطبيق الباكالوريا">
+                </div>
+                <div class="card-content">
+                    <div class="card-category">
+                        <i class="fas fa-graduation-cap"></i>
+                        تطبيقات الباكالوريا
+                    </div>
+                    <h3 class="card-title">كويز تواريخ الوحدة الأولى</h3>
+                    <p class="card-description">
+                        هذا التطبيق موجه لطلبة الباكالوريا جميع الشعب، يحتوي على أسئلة كويز لتواريخ الوحدة الأولى لمساعدتك في المراجعة.
+                    </p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-download"></i> تحميل التطبيق
+                    </a>
+                </div>
+            </div>
+
+
+            
+            <!-- تطبيق 5 -->
+            <div class="card">
+                <div class="card-image">
+<img src="WAJIBATI.jpg" alt="تطبيق واجباتي" style="max-width: 80%; height:  80%;">
+                </div>
+                <div class="card-content">
+                    <div class="card-category">
+                        <i class="fas fa-book"></i>
+                        تطبيق واجباتي
+                    </div>
+                    <h3 class="card-title">منظم الواجبات المدرسية</h3>
+                    <p class="card-description">
+                        أداة متكاملة لإدارة الواجبات المدرسية وتنظيم الوقت، تساعدك على إنجاز مهامك في الوقت المحدد دون تأجيل.
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-globe"></i> زيارة الموقع
+                        </a>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-download"></i> تحميل التطبيق
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- تطبيق 2 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="app/photo_2024-05-16_10-14-44.jpg" alt="تطبيق المذكرة">
+                </div>
+                <div class="card-content">
+                    <div class="card-category">
+                        <i class="fas fa-edit"></i>
+                        تطبيق المذكرة
+                    </div>
+                    <h3 class="card-title">تطبيق تدوين الملاحظات</h3>
+                    <p class="card-description">
+                        أداة بسيطة وفعالة لتدوين الملاحظات والأفكار المهمة أثناء المذاكرة، يساعدك على تنظيم أفكارك ومراجعتها لاحقاً.
+                    </p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-download"></i> تحميل التطبيق
+                    </a>
+                </div>
+            </div>
+
+            <!-- تطبيق 3 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="app/photo_2024-05-16_10-15-14.jpg" alt="تطبيق المهمات">
+                </div>
+                <div class="card-content">
+                    <div class="card-category">
+                        <i class="fas fa-tasks"></i>
+                        تطبيق المهمات
+                    </div>
+                    <h3 class="card-title">منظم المهام اليومية</h3>
+                    <p class="card-description">
+                        تطبيق يساعدك على تنظيم مهامك اليومية وتتبع إنجازاتك، مثالي لتنظيم وقت المذاكرة والمراجعة قبل الامتحانات.
+                    </p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-download"></i> تحميل التطبيق
+                    </a>
+                </div>
+            </div>
+
+            <!-- تطبيق 4 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="app/photo_2024-05-16_10-15-18.jpg" alt="تطبيق العادات">
+                </div>
+                <div class="card-content">
+                    <div class="card-category">
+                        <i class="fas fa-chart-line"></i>
+                        تطبيق العادات
+                    </div>
+                    <h3 class="card-title">متابعة العادات الدراسية</h3>
+                    <p class="card-description">
+                        يساعدك على تكوين عادات دراسية إيجابية وتتبع تقدمك اليومي في المذاكرة والمراجعة لتحقيق أفضل النتائج.
+                    </p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-download"></i> تحميل التطبيق
+                    </a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+           
+                        <div class="bot-section">
+                            <h4 class="text-center mb-3"><i class="fas fa-robot me-2"></i>بوت الإقتراحات والشكاوى</h4>
+                            <p class="text-center">يمكنك استخدام بوت التليجرام الخاص بنا لإرسال اقتراحاتك أو الإبلاغ عن أي مشاكل تواجهها. نحن نقدر ملاحظاتك وسنعمل على تحسين خدماتنا بناءً عليها.</p>
+                            <div class="text-center mt-3">
+                             <a href="http://t.me/Adat3ilm_challangesBot" class="btn btn-primary">
+
+                                    <i class="fab fa-telegram me-2"></i>فتح البوت الآن
+                                </a>
+                            </div>
+                        </div>
+                        
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-tasks"></i>
+                        نظّم يومك بذكاء
+                    </h3>
+                    <p>
+                        سجّل مهامك اليومية، وابدأ بتقسيمها إلى خطوات قصيرة وواضحة، فكلما كتبت ورتّبت ما عليك إنجازه، أصبح تنفيذها أسهل وأسرع.
+                    </p>
+                    <p>
+                        <i class="fas fa-check-circle"></i> سهولة | 
+                        <i class="fas fa-sort-amount-up"></i> ترتيب | 
+                        <i class="fas fa-rocket"></i> إنجاز
+                    </p>
+                    
+                    <div class="footer-links">
+                        <a href="https://adatealm.github.io/TO_DO_APP/WAJIBATI" class="footer-link">
+                            <i class="fas fa-link"></i> تطبيق واجباتي
+                        </a>
+                        <a href="https://adatealm.github.io/TO_DO_APP/" class="footer-link">
+                            <i class="fas fa-globe"></i> موقع واجباتي
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-robot"></i>
+                        بوت الإقتراحات
+                    </h3>
+                    <p>
+                        يمكنك استخدام بوت التليجرام الخاص بنا لإرسال اقتراحاتك أو الإبلاغ عن أي مشاكل تواجهها. نحن نقدر ملاحظاتك وسنعمل على تحسين خدماتنا بناءً عليها.
+                    </p>
+                    <a href="#" class="footer-link">
+                        <i class="fab fa-telegram"></i> فتح البوت الآن
+                    </a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-share-alt"></i>
+                        تواصل معنا
+                    </h3>
+                    <p>
+                        تابعنا على وسائل التواصل الاجتماعي للحصول على آخر التحديثات والدروس والمواد التعليمية.
+                    </p>
+                    
+                    <div class="social-links">
+    <a href="https://t.me/adatealm" class="social-link">
+        <i class="fab fa-telegram"></i>
+        <span class="social-tooltip">تيليجرام</span>
+    </a>
+    <a href="http://t.me/ADATEALM_bot" class="social-link">
+        <i class="fas fa-robot"></i>
+        <span class="social-tooltip">بوت التليجرام</span>
+    </a>
+    <a href="mailto:adatealm@gmail.com" class="social-link">
+        <i class="fas fa-envelope"></i>
+        <span class="social-tooltip">البريد الإلكتروني</span>
+    </a>
+    <a href="https://www.youtube.com/@adatealm" class="social-link">
+        <i class="fab fa-youtube"></i>
+        <span class="social-tooltip">يوتيوب</span>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=61560859966476" class="social-link">
+        <i class="fab fa-facebook-f"></i>
+        <span class="social-tooltip">فيسبوك</span>
+    </a>
+    <a href="https://www.instagram.com/adat_ealm" class="social-link">
+        <i class="fab fa-instagram"></i>
+        <span class="social-tooltip">إنستغرام</span>
+    </a>
+    <a href="https://www.tiktok.com/@adat_ealm" class="social-link">
+        <i class="fab fa-tiktok"></i>
+        <span class="social-tooltip">تيك توك</span>
+    </a>
+    <a href="#" class="social-link">
+        <i class="fab fa-twitter"></i>
+        <span class="social-tooltip">تويتر</span>
+    </a>
+</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 منصة الطلبة - جميع الحقوق محفوظة
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

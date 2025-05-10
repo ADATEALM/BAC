@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>صفحة الموقع </title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .options {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .message {
+            margin-top: 20px;
+            color: #ff5555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>الرجاء اختيار أحد الخيارات:</h2>
+        <div class="options">
+            <button id="continue">الدخول للموقع</button>
+            <button id="bac">موقع الباكالوريا</button>
+            <button id="exit">خروج</button>
+        </div>
+        <div id="message" class="message" style="display: none;"></div>
+    </div>
+
+    <script>
+        // تعطيل كامل لكل الميزات
+        (function() {
+            // تعطيل جميع الوظائف الأساسية
+            const disable = [
+                'open', 'alert', 'confirm', 'prompt', 'print',
+                'fetch', 'XMLHttpRequest', 'WebSocket',
+                'setInterval', 'setTimeout', 'requestAnimationFrame',
+                'localStorage', 'sessionStorage'
+            ];
+            
+            disable.forEach(func => {
+                if (window[func]) {
+                    window[func] = function() { return null; };
+                }
+            });
+
+            // تعطيل إنشاء العناصر
+            document.createElement = function() {
+                return { setAttribute: function() {} };
+            };
+
+            // تعطيل الأحداث
+            ['click', 'keydown', 'contextmenu', 'submit'].forEach(e => {
+                document.addEventListener(e, function(ev) {
+                    if (!ev.target.closest('button')) {
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                    }
+                }, true);
+            });
+
+            // إيقاف أي وسائط
+            document.querySelectorAll('video, audio, iframe').forEach(el => {
+                el.remove();
+            });
+        })();
+
+        // معالجة الاختيارات
+        document.getElementById('continue').onclick = function() {
+            const message = document.getElementById('message');
+            message.textContent = "غير متاح، ركز في باك الخاص بك وبالتوفيق ان شاء الله";
+            message.style.display = 'block';
+        };
+
+        document.getElementById('bac').onclick = function() {
+            window.location.href = 'BAC.html';
+        };
+
+        document.getElementById('exit').onclick = function() {
+            window.open('', '_self', '');
+            window.close();
+        };
+    </script>
+</body>
+</html>
