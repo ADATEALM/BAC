@@ -1,42 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>صفحة الموقع </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الموقع</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             margin: 0;
             padding: 0;
             background: #000;
             color: #fff;
-            font-family: Arial, sans-serif;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
         }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+        }
         .options {
-            margin-top: 20px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         button {
-            padding: 10px 20px;
-            margin: 0 10px;
+            padding: 12px 25px;
             cursor: pointer;
             background: #333;
             color: white;
             border: none;
             border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #444;
         }
         .message {
-            margin-top: 20px;
+            margin-top: 25px;
             color: #ff5555;
             font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            background: rgba(255, 85, 85, 0.1);
+        }
+        
+        /* تأثيرات للجمالية */
+        h2 {
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #ff5555;
+        }
+        
+        /* وسائط الاستعلام للتكيف مع أحجام الشاشات */
+        @media (min-width: 768px) {
+            .options {
+                flex-direction: row;
+                justify-content: center;
+            }
+            button {
+                width: auto;
+                min-width: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <div>
+    <div class="container">
         <h2>الرجاء اختيار أحد الخيارات:</h2>
         <div class="options">
             <button id="continue">الدخول للموقع</button>
@@ -85,20 +133,25 @@
         })();
 
         // معالجة الاختيارات
-        document.getElementById('continue').onclick = function() {
+        document.getElementById('continue').addEventListener('click', function() {
             const message = document.getElementById('message');
-            message.textContent = "غير متاح، ركز في باك الخاص بك وبالتوفيق ان شاء الله";
+            message.textContent = "غير متاح، ركز في الباكالوريا  الخاص بك وبالتوفيق ان شاء الله";
             message.style.display = 'block';
-        };
+            
+            // إخفاء الرسالة بعد 5 ثواني
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        });
 
-        document.getElementById('bac').onclick = function() {
+        document.getElementById('bac').addEventListener('click', function() {
             window.location.href = 'BAC.html';
-        };
+        });
 
-        document.getElementById('exit').onclick = function() {
+        document.getElementById('exit').addEventListener('click', function() {
             window.open('', '_self', '');
             window.close();
-        };
+        });
     </script>
 </body>
 </html>
